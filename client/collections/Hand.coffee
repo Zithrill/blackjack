@@ -6,8 +6,9 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
-    if !@isDealer and @isBusted()
-      @trigger('busted', @)
+    if @isBusted() is true
+      console.log('player Busted')
+      @trigger('busted')
 
   stand: ->
     @trigger('dealerTurn', @)
@@ -36,23 +37,35 @@ class window.Hand extends Backbone.Collection
     , 0
     if hasAce then [score, score + 10] else [score]
 
+  hitDealer: ->
+    @add(@deck.pop()).last()
+
   playTurn: ->
     score = @scoresDealer()
-    if ((score[1] and score[1] < 17) or score[0] < 17)
-      @hit()
+    if ((score[1]? and score[1] < 17) or score[0] < 17)
+      console.log('dealer hits')
+      @hitDealer()
       # if it's busted, stop and call isBusted
       # else, play turn again
-      if @isBusted()
+      if @isBusted() is true
+        console.log('dealer busted')
         @trigger('busted', @)
       else
+        console.log('dealer not yet over 17')
         @playTurn()
     else
+      console.log('dealer stands')
       @.at(0).flip()
       @trigger('gameOver', @)
 
   isBusted: ->
     score = @scoresDealer()
-    if score > 21
+    if score[0] > 21
       true
     else
       false
+
+  hasBlackJack: ->
+    score = @scores()
+    if score[1] is 21
+      @trigger('blackjack', @)
