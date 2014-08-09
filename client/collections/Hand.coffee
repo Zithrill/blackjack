@@ -6,7 +6,8 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
-    @isBusted()
+    if !@isDealer and @isBusted()
+      @trigger('busted', @)
 
   stand: ->
     @trigger('dealerTurn', @)
@@ -37,15 +38,21 @@ class window.Hand extends Backbone.Collection
 
   playTurn: ->
     score = @scoresDealer()
-    console.log(score)
     if ((score[1] and score[1] < 17) or score[0] < 17)
       @hit()
-      @playTurn()
+      # if it's busted, stop and call isBusted
+      # else, play turn again
+      if @isBusted()
+        @trigger('busted', @)
+      else
+        @playTurn()
     else
       @.at(0).flip()
       @trigger('gameOver', @)
 
   isBusted: ->
     score = @scoresDealer()
-    if score > 21 then @trigger('busted', @)
-
+    if score > 21
+      true
+    else
+      false

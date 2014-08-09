@@ -6,17 +6,21 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     (@get 'playerHand').on 'dealerTurn',( -> (@get 'dealerHand').playTurn()), @
-    (@get 'dealerHand').on 'gameOver',( -> console.log 'game over'), @
-    @set 'winner', undefined
+    (@get 'dealerHand').on 'gameOver',( -> @findWinner()), @
+    (@get 'playerHand').on 'busted',( -> (@set 'winner', 'dealer') @findWinner()), @
+    (@get 'dealerHand').on 'busted',( -> (@set 'winner', 'player') @findWinner()), @
+    @set 'winner', 'draw'
 
   findWinner: ->
-    playerScore = (@get 'playerHand').scores()
-    dealerScore = (@get 'dealerHand').scores()
-    if playerScore < 21 && dealerScore > 21
-      @set 'winner', 'player'
-    if playerScore < 21 && dealerScore < 21 && playerScore > dealerScore
-      @set 'winner', 'player'
-    if playerScore
+    if @get 'winner' is undefined
+      playerScore = (@get 'playerHand').scores()
+      dealerScore = (@get 'dealerHand').scores()
+      if playerScore > dealerScore
+        @set 'winner', 'player'
+      if playerScore < dealerScore
+        @set 'winner', 'dealer'
+    @trigger('displayWinner', this)
+
 
 
 
