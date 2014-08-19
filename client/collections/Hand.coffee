@@ -7,7 +7,6 @@ class window.Hand extends Backbone.Collection
   hit: ->
     @add(@deck.pop()).last()
     if @isBusted() is true
-      console.log('player Busted')
       @trigger('busted')
 
   stand: ->

@@ -8,11 +8,99 @@
   background-size: cover;
 }
 
-.covered {
+.covered{
   background-image: url("../img/card-back.png");
-  color: transparent;
+  color: black;
+}
+
+.covered img{
+  visibility: hidden;
 }
 
 .hand {
   overflow: auto;
+}
+div.hand{
+  display: inline;
+  margin: 10px auto;
+  text-align: center;
+}
+
+body{
+  color: #247891;
+  background-image: url("http://www.andrewlaming.com.au/images/Build/background/background-animated.gif");
+}
+
+body div{
+  background-image: url("http://subtlepatterns.com/patterns/congruent_outline.png");
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: 10px 10px 5px #888888;
+  width: 600;
+  height: 280;
+  margin: auto;
+}
+button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+  background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+  background-color:#79bbff;
+  -webkit-border-top-left-radius:13px;
+  -moz-border-radius-topleft:13px;
+  border-top-left-radius:13px;
+  -webkit-border-top-right-radius:13px;
+  -moz-border-radius-topright:13px;
+  border-top-right-radius:13px;
+  -webkit-border-bottom-right-radius:13px;
+  -moz-border-radius-bottomright:13px;
+  border-bottom-right-radius:13px;
+  -webkit-border-bottom-left-radius:13px;
+  -moz-border-radius-bottomleft:13px;
+  border-bottom-left-radius:13px;
+  text-indent:0;
+  border:1px solid #84bbf3;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  font-style:normal;
+  height:36px;
+  line-height:36px;
+  width:100px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #528ecc;
+}
+button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+  background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+  background-color:#378de5;
+}
+button:active {
+  position:relative;
+  top:1px;
+}
+iframe{
+  position: fixed;
+  bottom: 0;
+}
+.dealer-hand-container{
+  border-radius: 20px;
+  border-color: yellow;
+}
+.player-hand-container{
+  border-radius: 20px;
+  border-color: yellow;
+}
+
+.drinkwomanon {
+  float: left;
+}
+.drinkwomanoff {
+  float: left;
+  visibility:hidden;
 }

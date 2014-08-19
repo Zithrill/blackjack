@@ -12,9 +12,12 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
-    @model.on 'displayWinner',( -> (console.log(@model.get 'winner'))), @
-    # @model.on 'displayWinner',( -> (alert "The winner is #{ @model.get('winner') }")), @
-    # (@get 'playerHand').on 'busted',( -> (@set 'winner', 'dealer')), @
+    @model.on 'displayWinner',( ->
+      winner = @model.get 'winner'
+      if winner is "player" then alert("You Won!")
+      if winner is "dealer" then alert("To bad try again!")
+      if winner is "draw" then alert("push, try again")
+    ), @
     @model.on 'disableButtons',( -> @stopPlayerInteraction()), @
 
   render: ->
@@ -24,5 +27,6 @@ class window.AppView extends Backbone.View
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
   stopPlayerInteraction: ->
-    console.log("stop player!")
     @.undelegateEvents()
+
+
